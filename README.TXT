@@ -1,6 +1,3 @@
-Project: naive-ticket-machine
-Authors: David Barnes and Michael Kolling
-
 This project is part of the material for the book
 
    Objects First with Java - A Practical Introduction using BlueJ
@@ -100,10 +97,44 @@ See the doc directory for the chapter PDF
      the field value
 2.38 If the price was constant the word price could be replaced with the
      constant numerical price i.e., "# 75 cents"
-2.39 
+2.39 in TicketMachine code 
 2.40 The method doesn't need parameters since it only needs to access the 
      balance field
 2.41 The method changes the price field correctly and since it does so its
      a mutator method
-2.42 in code
-2.43 
+2.42 in TicketMachine code
+2.43 The balance does not update if an error is raised because it catches 
+     the error and doesn't update.
+2.44 It will accept 0 as an acceptable money insert. This shouldn't break
+     anything since 0 will not affect the balance amount.
+2.45 It worked because there were only two possible outcomes - we could see
+     the circle or we couldn't. This meant it was suited well for a T/F.
+2.46 It catches the error and reduces the balance by price instead of 
+     resetting it to 0
+2.47 No, the ticket only prints if the balnce is greater or equal to the 
+     price so at the smallest it would be 0.
+2.48 / * %
+2.49 public double saving = price*discount;
+2.50 public double mean = total/count;
+2.51 
+    if (price > budget) { 
+        System.out.println("Too expensive"); 
+    } else {
+        System.out.println("Just right"); 
+    }
+2.52 
+    if (price > budget) { 
+        System.out.println("Too expensive");
+        System.out.println("Your budget is: " + budget); 
+    } else {
+        System.out.println("Just right"); 
+    }
+2.53 balance is an instance variable, you don't need to return it to update
+     it and this method returns it after it's already been set to 0 without
+     keeping the old value.
+2.54 It won't compile because return ends the method call but the system 
+    finds more to parse raising an exception.
+2.55 in smarterTM
+2.56 It's both, it return total but also gives total a new value
+2.57 in smarterTM
+ 

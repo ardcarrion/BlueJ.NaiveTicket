@@ -45,7 +45,7 @@ public class SmarterTicketMachine
      */
     public void insertMoney(int amount)
     {
-        if (amount > 0) {
+        if (amount >= 0) {
             balance = balance + amount;
         } else {
             System.out.println("Use a positive amount: " + amount);
@@ -78,7 +78,9 @@ public class SmarterTicketMachine
     public void printTicket()
     {
         // Simulate the printing of a ticket.
-        if (balance >= price) {
+        int amountLeftToPay;
+        amountLeftToPay = balance - price;
+        if (amountLeftToPay <= 0) {
             System.out.println("##################");
             System.out.println("# The BlueJ Line");
             System.out.println("# Ticket");
@@ -91,8 +93,9 @@ public class SmarterTicketMachine
         // Clear the balance.
             balance = balance - price;
         } else {
+            
             System.out.println("You must insert at least: " +
-                              (price - balance) + "cents.");
+                              (price - balance) + " cents.");
         }
     }
     
@@ -103,4 +106,12 @@ public class SmarterTicketMachine
         balance = 0;
         return amountToRefund;
     }
+    
+    public int emptyMachine() {
+        int oldTotal = total;
+        total = 0;
+        return oldTotal;
+
+    }
 }
+
