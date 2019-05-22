@@ -1,15 +1,7 @@
 /**
- * TicketMachine models a naive ticket machine that issues
- * flat-fare tickets.
- * The price of a ticket is specified via the constructor.
- * It is a naive machine in the sense that it trusts its users
- * to insert enough money before trying to print a ticket.
- * It also assumes that users enter sensible amounts.
- *
- * @author David J. Barnes and Michael Kolling
- * @version 2008.03.30
+ * SmarterTicketMachine updates naive ticket machine
  */
-public class TicketMachine
+public class SmarterTicketMachine
 {
     // The price of a ticket from this machine.
     private int price;
@@ -24,20 +16,13 @@ public class TicketMachine
      * are no checks to ensure this.
      */
     
-    public TicketMachine(int ticketCost)
+    public SmarterTicketMachine(int ticketCost)
     {
         price = ticketCost;
         balance = 0;
         total = 0;
     }
    
-    public TicketMachine() 
-    {
-        price = 500;
-        balance = 0;
-        total = 0;
-    }
-
     /**
      * Return the price of a ticket.
      */
@@ -60,7 +45,11 @@ public class TicketMachine
      */
     public void insertMoney(int amount)
     {
-        balance = balance + amount;
+        if (amount > 0) {
+            balance = balance + amount;
+        } else {
+            System.out.println("Use a positive amount: " + amount);
+        }
     }
     /**
      * Set the price equal to ticketCost
@@ -89,16 +78,29 @@ public class TicketMachine
     public void printTicket()
     {
         // Simulate the printing of a ticket.
-        System.out.println("##################");
-        System.out.println("# The BlueJ Line");
-        System.out.println("# Ticket");
-        System.out.println("# " + price + " cents.");
-        System.out.println("##################");
-        System.out.println();
-
+        if (balance >= price) {
+            System.out.println("##################");
+            System.out.println("# The BlueJ Line");
+            System.out.println("# Ticket");
+            System.out.println("# " + price + " cents.");
+            System.out.println("##################");
+            System.out.println();
+            
         // Update the total collected with the balance.
-        total = total + balance;
+            total = total + balance;
         // Clear the balance.
+            balance = balance - price;
+        } else {
+            System.out.println("You must insert at least: " +
+                              (price - balance) + "cents.");
+        }
+    }
+    
+    public int refundBalance()
+    {
+        int amountToRefund;
+        amountToRefund = balance;
         balance = 0;
+        return amountToRefund;
     }
 }
